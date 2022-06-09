@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\BookRepository;
-use App\Entities\Book;
+use App\Models\Book;
 use App\Validators\BookValidator;
 
 /**
@@ -44,5 +44,5 @@ class BookRepositoryEloquent extends BaseRepository implements BookRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }
