@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('login');
+    });
+
+    Route::get('login', function () {
+        return view('login');
+    })->name('login');
+
+    Route::post('login', [AuthenticatedController::class, 'store']);
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('logout', [AuthenticatedController::class, 'destroy'])
+                ->name('logout');
 });

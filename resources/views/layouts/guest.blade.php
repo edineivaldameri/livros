@@ -12,15 +12,11 @@
 		<link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-
-        @livewireStyles
     </head>
     <body>
         {{ $slot }}
 
         <script src="{{ asset('js/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('js/scripts.bundle.js') }}"></script>
-
-        @livewireScripts
     </body>
 </html>
