@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedController;
+use App\Http\Controllers\BooksController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +29,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('dashboard', [BooksController::class, 'index'])->name('dashboard');
 
-    Route::get('logout', [AuthenticatedController::class, 'destroy'])
+    Route::resource('books', BooksController::class);
+
+    Route::post('logout', [AuthenticatedController::class, 'destroy'])
                 ->name('logout');
 });

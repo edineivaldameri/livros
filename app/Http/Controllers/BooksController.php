@@ -48,17 +48,23 @@ class BooksController extends Controller
      */
     public function index()
     {
+
+        /*if (empty($request->input('query'))) {
+            $associates = $this->repository->orderBy('name', 'ASC')->paginate(perPage: 20);
+        } else {
+            $associates = $this->repository->search($request->input('query'))->orderBy('name', 'ASC')->paginate(perPage: 20);
+        }*/
+
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $books = $this->repository->all();
+        $books = $this->repository->orderBy('title', 'ASC')
+            ->paginate(12);
 
         if (request()->wantsJson()) {
-
             return response()->json([
                 'data' => $books,
             ]);
-        }
-
-        return view('books.index', compact('books'));
+        };
+        return view('dashboard.index', compact('books'));
     }
 
     /**

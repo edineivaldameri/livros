@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
@@ -13,9 +14,12 @@ use OwenIt\Auditing\Contracts\Auditable;
  *
  * @package namespace App\Models;
  */
-class Book extends Model implements Transformable
+class Book extends Model implements Transformable, Auditable
 {
-    use TransformableTrait, SoftDeletes, \OwenIt\Auditing\Auditable;
+    use TransformableTrait;
+    use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
+    use HasFactory;
 
     /**
      * Attributes to include in the Audit.

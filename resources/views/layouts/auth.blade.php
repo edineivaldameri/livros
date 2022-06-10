@@ -1,42 +1,58 @@
-@extends('base.base')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-@section('content')
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Authentication-->
-        <div
-            class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed"
-            style="background-image: url({{ asset(theme()->getIllustrationUrl('14.png')) }})">
+        <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-            <!--begin::Content-->
-            <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
-                <!--begin::Logo-->
-                <a href="{{ $theme->getPageUrl('') }}" class="mb-12">
-                    <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/logo-1.svg') }}" class="h-45px"/>
-                </a>
-                <!--end::Logo-->
+        <link href="{{ asset('css/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
-                <!--begin::Wrapper-->
-                <div class="{{ $wrapperClass ?? '' }} bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-                    {{ $slot }}
-                </div>
-                <!--end::Wrapper-->
-            </div>
-            <!--end::Content-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    </head>
+    <body id="kt_body" class="page-loading-enabled header-fixed header-tablet-and-mobile-fixed">
+        <!--begin::loader-->
+		<div class="page-loader">
+			<span class="spinner-border text-primary" role="status">
+				<span class="visually-hidden">{{ __('Loading') }}...</span>
+			</span>
+		</div>
+		<!--end::Loader-->
 
-            <!--begin::Footer-->
-            <div class="d-flex flex-center flex-column-auto p-10">
-                <!--begin::Links-->
-                <div class="d-flex align-items-center fw-bold fs-6">
-                    <a href="{{ $theme->getOption("general", "about") }}" class="text-muted text-hover-primary px-2">{{ __('About') }}</a>
+        <!--begin::Root-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="page d-flex flex-row flex-column-fluid">
+				<!--begin::Wrapper-->
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
-                    <a href="{{ $theme->getOption('general', 'contact') }}" class="text-muted text-hover-primary px-2">{{ __('Contact Us') }}</a>
+                    @include('layouts.private._header')
 
-                    <a href="{{ $theme->getOption('product', 'purchase') }}" class="text-muted text-hover-primary px-2">{{ __('Purchase') }}</a>
-                </div>
-                <!--end::Links-->
-            </div>
-            <!--end::Footer-->
-        </div>
-        <!--end::Authentication-->
-    </div>
-@endsection
+					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Post-->
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+                            <div id="kt_content_container" class="container-fluid">
+                                {{ $slot }}
+                            </div>
+						</div>
+						<!--end::Post-->
+					</div>
+					<!--end::Content-->
+
+                    @include('layouts.private._footer')
+
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::Root-->
+
+        <script src="{{ asset('js/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('js/scripts.bundle.js') }}"></script>
+    </body>
+</html>

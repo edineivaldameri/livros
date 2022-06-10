@@ -1,5 +1,22 @@
 {
     "Email": "E-mail",
     "Password": "Senha",
-    "Log in": "Login"
+    "Log in": "Login",
+    "Loading" : "Carregando",
+    "Contact" : "Contato",
+    "Books" : "Livros",
+    "Add" : "Adicionar",
+    "Log Out": "Sair",
+    "Search" : "Buscar",
+    "Author": "Autor",
+    "Pages": "Páginas",
+    "Registration": "Cadastro",
+    "Details" : "Detalhes",
+    "Title" : "Título",
+    "Information" : "Informações",
+    "View": "Visualizar",
+    "Showing": "Mostrando",
+    "to": "até",
+    "of": "de",
+    "results": "resultados"
 }
