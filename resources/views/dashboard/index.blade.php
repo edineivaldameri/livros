@@ -1,4 +1,4 @@
-<x-auth-layout>
+<x-auth-layout :weather="$weather">
     <div class="d-flex flex-wrap flex-stack pb-7">
         <x-dashboard.search-actions />
     </div>

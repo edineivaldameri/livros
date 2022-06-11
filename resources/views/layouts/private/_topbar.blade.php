@@ -1,5 +1,43 @@
 <!--begin::Toolbar wrapper-->
 <div class="d-flex align-items-stretch flex-shrink-0">
+    <div class="d-flex align-items-center ms-1 ms-lg-3">
+        <!--begin::Menu- wrapper-->
+        <div class="btn btn-icon btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px menu-dropdown" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+            @if(isNight())
+                <i class="bi bi-moon-stars-fill fs-2"></i>
+            @else
+                <i class="bi bi-sun-fill fs-2"></i>
+            @endif
+        </div>
+        <!--begin::Menu-->
+        <div class="menu menu-sub menu-sub-dropdown menu-column w-300px w-lg-300px" data-kt-menu="true" style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate(-229px, 65px);" data-popper-placement="bottom-end">
+            <div class="container-weather">
+                <div class="weather-side">
+                    <div class="weather-gradient"></div>
+                    <div class="date-container">
+                        <h2 class="date-dayname">
+                            <i class="bi bi-geo-alt fs-2" data-feather="map-pin"></i>
+                            {{ $weather['city'] }}
+                        </h2>
+                        <span class="date-day">
+                            {{ $weather['date'] }} - {{ $weather['time'] }}
+                        </span>
+                    </div>
+                    <div class="weather-container">
+                        <h1 class="weather-temp">
+                            {{ $weather['temp'] }}°C
+                        </h1>
+                        <h3 class="weather-desc">
+                            {{ $weather['description'] }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Menu-->
+        <!--end::Menu wrapper-->
+    </div>
+
     <!--begin::User menu-->
     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
         <!--begin::Menu wrapper-->

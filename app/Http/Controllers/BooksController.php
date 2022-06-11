@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Prettus\Validator\Contracts\ValidatorInterface;
+use App\Facades\ApiWeatherFacade;
 use App\Http\Requests\BookCreateRequest;
 use App\Http\Requests\BookUpdateRequest;
 use App\Models\Book;
@@ -23,13 +23,16 @@ class BooksController extends Controller
     {
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $books = $this->repository->orderBy('title', 'ASC')
             ->paginate(12);
-
-        return view('dashboard.index', compact('books'));
+            //dd(ApiWeatherFacade::json());
+        return view('dashboard.index', [
+            'books' => $books,
+            'weather' => ApiWeatherFacade::json()
+        ]);
     }
 
     public function create(Request $request): View

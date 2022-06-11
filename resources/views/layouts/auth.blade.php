@@ -10,6 +10,7 @@
 
         <link href="{{ asset('css/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/weather.css') }}" rel="stylesheet" type="text/css" />
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     </head>
@@ -29,7 +30,7 @@
 				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
-                    @include('layouts.private._header')
+                    @include('layouts.private._header', $weather)
 
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
