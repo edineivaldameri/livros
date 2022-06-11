@@ -1,4 +1,4 @@
-<x-auth-layout>
+<x-auth-layout :weather="$weather">
     <form method="POST" action="{{ route('books.update', $book->id) }}"  class="form d-flex flex-column flex-lg-row fv-plugins-bootstrap5 fv-plugins-framework">
         @csrf
         @method('PUT')
@@ -71,7 +71,7 @@
                     <!--begin::Input group-->
                     <div>
                         <!--begin::Label-->
-                        <label class="form-label">
+                        <label class="required form-label">
                             {{ __('Description') }}
                         </label>
                         <!--end::Label-->

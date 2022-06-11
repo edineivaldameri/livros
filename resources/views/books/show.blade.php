@@ -1,4 +1,4 @@
-<x-auth-layout>
+<x-auth-layout :weather="$weather">
     <!--begin::Post card-->
     <div class="card">
         <!--begin::Body-->

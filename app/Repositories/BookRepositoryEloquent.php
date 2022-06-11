@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\BookRepository;
 use App\Models\Book;
-use App\Validators\BookValidator;
 
 /**
  * Class BookRepositoryEloquent.
@@ -31,18 +30,6 @@ class BookRepositoryEloquent extends BaseRepository implements BookRepository
     {
         return Book::class;
     }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return BookValidator::class;
-    }
-
 
     /**
      * Boot up the repository, pushing criteria

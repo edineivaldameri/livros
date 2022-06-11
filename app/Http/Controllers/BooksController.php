@@ -9,18 +9,18 @@ use App\Http\Requests\BookCreateRequest;
 use App\Http\Requests\BookUpdateRequest;
 use App\Models\Book;
 use App\Repositories\BookRepository;
-use App\Validators\BookValidator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BooksController extends Controller
 {
+    private $weather;
     public function __construct(
         protected BookRepository $repository,
-        protected BookValidator $validator,
         )
     {
+        $this->weather = ApiWeatherFacade::json();
     }
 
     public function index(Request $request): View
@@ -28,16 +28,18 @@ class BooksController extends Controller
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $books = $this->repository->orderBy('title', 'ASC')
             ->paginate(12);
-            //dd(ApiWeatherFacade::json());
+
         return view('dashboard.index', [
             'books' => $books,
-            'weather' => ApiWeatherFacade::json()
+            'weather' => $this->weather,
         ]);
     }
 
     public function create(Request $request): View
     {
-        return view('books.create');
+        return view('books.create', [
+            'weather' => $this->weather,
+        ]);
     }
 
     public function store(BookCreateRequest $request): RedirectResponse
@@ -49,12 +51,18 @@ class BooksController extends Controller
 
     public function show(Book $book): View
     {
-        return view('books.show', compact('book'));
+        return view('books.show', [
+            'book' => $book,
+            'weather' => $this->weather,
+        ]);
     }
 
     public function edit(Book $book): View
     {
-        return view('books.edit', compact('book'));
+        return view('books.edit', [
+            'book' => $book,
+            'weather' => $this->weather,
+        ]);
     }
 
     public function update(BookUpdateRequest $request, Book $book): RedirectResponse

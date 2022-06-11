@@ -18,7 +18,7 @@
                             <label class="form-label fs-6 fw-bolder text-dark">
                                 {{ __('Email') }}
                             </label>
-                            <input class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" placeholder="{{ __('Email') }}" required type="mail" name="email" value="test@example.com" autocomplete="off" />
+                            <input class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" placeholder="{{ __('Email') }}" required type="mail" name="email" autocomplete="off" />
                             @error('email') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="fv-row mb-10">
@@ -27,8 +27,16 @@
                                     {{ __('Password') }}
                                 </label>
                             </div>
-                            <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" required type="password" name="password" value="123456" autocomplete="off" />
+                            <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" required type="password" name="password" autocomplete="off" />
                             @error('password') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="fv-row mb-10">
+                            <label class="form-check form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" name="remember"/>
+                                <span class="form-check-label fw-bold text-gray-700 fs-6">
+                                    {{ __('Remember me') }}
+                                </span>
+                            </label>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">
