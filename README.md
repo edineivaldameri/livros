@@ -1,62 +1,74 @@
 <p align="center">
     <a href="https://laravel.com" target="_blank">
-        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400">
+        <img src="https://raw.githubusercontent.com/edineivaldameri/livros/master/public/img/logo.png" width="400">
     </a>
 </p>
 
 ## Livraria Cultural
 
-Este projeto será construído e atualizado para atender 
-Projeto construído para atender os requisitos fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este projeto será construído e atualizado para atender os requisitos de um desafio de softare.
+Por consequências foram cumpridos alguns requisitos como: 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Utilização de Repository e Services através do pacote l5-repositor](https://github.com/andersao/l5-repository).
+- [Integração com API externa para exibir o clima](https://hgbrasil.com/status/weather).
+- Utilizado PHP 8, Laravel, Sistema de Autenticação e Migrations para criação das tabelas do banco.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalação
 
-## Learning Laravel
+1) Para iniciar o processo, baixe ou clone o repositório para seu ambiente local.
+2) Navege até o repositório criado.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-- Partindo do presuposto que você já tenha o composer instalando, execute o comando:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+``` bash
+composer install
+```
 
-## Laravel Sponsors
+## Configuração
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1) Crie sua bade de dados (MySql) e configure no arquivo .env
+2) Após configurado o arquivo .env com seu dados de acesso ao banco de dados, execute os seguintes comandos: 
 
-### Premium Partners
+``` bash
+php artisan config:cache
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+3) Realize a criação do seu mando de dados executando o comando:
+``` bash
+php artisan migrate
+```
+Neste momento as tabelas do banco de dados foram criadas e já estaram disponíveis para utilização:
 
-## Contributing
+4) VOcê pode popular o banco de dados executando o comando:
+``` bash
+php artisan db:seed
+```
+Este comando criará automaticamente um usuário: `test@example.com` com a senha: `123456`;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Após a criação do usuário será executado uma Factory para popular a tabela de livros com 50 registros iniciais;
 
-## Code of Conduct
+Se você não desejar criar esses registros, navegue ate o arquivo `database/seeders/DatabaseSeeder.php` e comente as linhas a seguir:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```php
+/**
+    $this->call([
+        BookSeeder::class,
+    ]);
+*/
+```
 
-## Security Vulnerabilities
+5) Para finalizar execute o comando:
+``` bash
+php artisan optimize:clear
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Executando o Projeto
 
-## License
+1) Se você seguiu todos os passos acima, deve ser capaz de executar o seu projeto sem problemas. Para isso execute o comando:
+``` bash
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2) Inicie o seu nagegador, [CLICANDO AQUI](http://localhost:8000/)
+
+Pronto, se tudo estiver correto você será direcionado para a Tela de Login e já pode iniciar a navegação pela aplicação;
