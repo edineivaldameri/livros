@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "edineivaldameri/livros",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Projeto Construído como forma de apreendizado e qualificação",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
@@ -9,7 +9,9 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.11",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "owen-it/laravel-auditing": "^13.0",
+        "prettus/l5-repository": "^2.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -29,7 +31,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files" :[
+            "app/Helpers/Helpers.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [
