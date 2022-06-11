@@ -1,210 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\BookCreateRequest;
 use App\Http\Requests\BookUpdateRequest;
+use App\Models\Book;
 use App\Repositories\BookRepository;
 use App\Validators\BookValidator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-/**
- * Class BooksController.
- *
- * @package namespace App\Http\Controllers;
- */
 class BooksController extends Controller
 {
-    /**
-     * @var BookRepository
-     */
-    protected $repository;
-
-    /**
-     * @var BookValidator
-     */
-    protected $validator;
-
-    /**
-     * BooksController constructor.
-     *
-     * @param BookRepository $repository
-     * @param BookValidator $validator
-     */
-    public function __construct(BookRepository $repository, BookValidator $validator)
+    public function __construct(
+        protected BookRepository $repository,
+        protected BookValidator $validator,
+        )
     {
-        $this->repository = $repository;
-        $this->validator  = $validator;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
-
-        /*if (empty($request->input('query'))) {
-            $associates = $this->repository->orderBy('name', 'ASC')->paginate(perPage: 20);
-        } else {
-            $associates = $this->repository->search($request->input('query'))->orderBy('name', 'ASC')->paginate(perPage: 20);
-        }*/
-
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $books = $this->repository->orderBy('title', 'ASC')
             ->paginate(12);
 
-        if (request()->wantsJson()) {
-            return response()->json([
-                'data' => $books,
-            ]);
-        };
         return view('dashboard.index', compact('books'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  BookCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function store(BookCreateRequest $request)
+    public function create(Request $request): View
     {
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            $book = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Book created.',
-                'data'    => $book->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return view('books.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function store(BookCreateRequest $request): RedirectResponse
     {
-        $book = $this->repository->find($id);
+        $book = $this->repository->create($request->all());
 
-        if (request()->wantsJson()) {
+        return redirect()->route('books.index')->with('success', __('Book created.'));
+    }
 
-            return response()->json([
-                'data' => $book,
-            ]);
-        }
-
+    public function show(Book $book): View
+    {
         return view('books.show', compact('book'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Book $book): View
     {
-        $book = $this->repository->find($id);
-
         return view('books.edit', compact('book'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  BookUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function update(BookUpdateRequest $request, $id)
+    public function update(BookUpdateRequest $request, Book $book): RedirectResponse
     {
-        try {
+        $book = $this->repository->update($request->all(), $book->id);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            $book = $this->repository->update($request->all(), $id);
-
-            $response = [
-                'message' => 'Book updated.',
-                'data'    => $book->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return redirect()->route('books.index')->with('success', __('Book updated.'));
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         $deleted = $this->repository->delete($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Book deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'Book deleted.');
+        return redirect()->route('books.index')->with('success', __('Book deleted.'));
     }
 }

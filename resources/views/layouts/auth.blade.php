@@ -36,6 +36,15 @@
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
                             <div id="kt_content_container" class="container-fluid">
+
+                                @if ($message = Session::get('success'))
+                                    <x-html.alert :type="'success'" :message="$message" />
+                                @endif
+
+                                @if ($message = Session::get('error'))
+                                    <x-html.alert :type="'danger'" :message="$message" />
+                                @endif
+
                                 {{ $slot }}
                             </div>
 						</div>
@@ -54,5 +63,7 @@
 
         <script src="{{ asset('js/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('js/scripts.bundle.js') }}"></script>
+
+        @yield('scripts')
     </body>
 </html>

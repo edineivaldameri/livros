@@ -11,7 +11,7 @@
             </span>
             <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
                 <div class="menu-item">
-                    <a class="menu-link py-3" href="{{ route('books.create') }}" title="Check out the complete documentation" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                    <a class="menu-link py-3" href="{{ route('books.create') }}" title="Área para adicionar novos livros" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                         <span class="menu-icon">
                             <i class="bi bi-box fs-3"></i>
                         </span>

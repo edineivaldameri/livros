@@ -2,23 +2,38 @@
     <div class="d-flex flex-wrap flex-stack pb-7">
         <x-dashboard.search-actions />
     </div>
-    <!--end::Toolbar-->
-    <!--begin::Tab Content-->
-    <div class="tab-content">
-        <!--begin::Tab pane-->
-        <div id="kt_book_pane_card" class="tab-pane fade show active">
-            <x-dashboard.pane-books-card :books="$books" />
-        </div>
-        <!--end::Tab pane-->
-        <!--begin::Tab pane-->
-        <div id="kt_book_pane_table" class="tab-pane fade">
-            <x-dashboard.pane-books-table :books="$books" />
-        </div>
-        <!--end::Tab pane-->
-    </div>
+
+    <x-dashboard.pane-books-table :books="$books" />
 
     <div class="row mt-5">
         {{ $books->links() }}
     </div>
 
+    @section('scripts')
+        <script>
+            $('.show-alert-delete-box').click(function(event){
+                var form =  $(this).closest("form");
+                event.preventDefault();
+                Swal.fire({
+                    title: "Tem certeza de que deseja excluir este registro?",
+                    text: "Se você excluir isso, ele desaparecerá para sempre!",
+                    icon: "warning",
+                    buttonsStyling: false,
+                    showCancelButton: false,
+                    showDenyButton: true,
+                    showConfirmButton: true,
+                    confirmButtonText: "Cancelar",
+                    denyButtonText: 'OK. EXCLUIR!',
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        denyButton: 'btn btn-danger'
+                    }
+                }).then((result) => {
+                    if (result.isDenied) {
+                        form.submit();
+                    }
+                });
+            });
+        </script>
+    @endsection
 </x-auth-layout>
