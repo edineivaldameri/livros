@@ -15,7 +15,7 @@ Por consequências foram cumpridos alguns requisitos como:
 
 ## Instalação
 
-1) Para iniciar o processo, baixe ou clone o repositório para seu ambiente local.
+1) Para iniciar o processo clone o [repositório](https://github.com/edineivaldameri/livros.git) para seu ambiente local.
 2) Navege até o repositório criado.
 
 -- Partindo do presuposto que você já tenha o composer instalando, execute o comando:

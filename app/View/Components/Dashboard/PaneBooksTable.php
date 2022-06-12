@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Dashboaard;
+namespace App\View\Components\Dashboard;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
