@@ -16,79 +16,13 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    <!--begin::Input group-->
-                    <div class="mb-10 fv-row fv-plugins-icon-container">
-                        <!--begin::Label-->
-                        <label class="required form-label">
-                            {{ __('Title') }}:
-                        </label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input type="text" name="title" id="title" value="{{ old('title') }}" required="required" class="form-control mb-2" placeholder="{{ __('Enter the Book Title') }}">
-                        <!--end::Input-->
-                        @error('title')
-                            <div class="fv-plugins-message-container invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="mb-10 fv-row fv-plugins-icon-container">
-                        <!--begin::Label-->
-                        <label class="required form-label">
-                            {{ __('Author') }}:
-                        </label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input type="text" name="author" id="author" value="{{ old('author') }}" required="required" class="form-control mb-2" placeholder="{{ __('Enter the author\'s name') }}">
-                        <!--end::Input-->
-                        @error('author')
-                            <div class="fv-plugins-message-container invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="mb-10 fv-row fv-plugins-icon-container">
-                        <!--begin::Label-->
-                        <label class="required form-label">
-                            {{ __('Pages') }}
-                        </label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input type="number" inputmode="numeric" required="required" value="{{ old('pages') }}" name="pages" id="pages" class="form-control mb-2" placeholder="{{ __('Enter the number of pages') }}">
-                        <!--end::Input-->
-                        @error('pages')
-                            <div class="fv-plugins-message-container invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div>
-                        <!--begin::Label-->
-                        <label class="required form-label">
-                            {{ __('Description') }}
-                        </label>
-                        <!--end::Label-->
-                        <!--begin::Editor-->
-                        <textarea id="description" name="description" class="tox-target">{{ old('description') }}</textarea>
-                        <!--end::Editor-->
-                        <!--begin::Description-->
-                        <div class="text-muted fs-7">
-                            {{ __('Set a description for the book to improve its visibility.') }}
-                        </div>
-                        <!--end::Description-->
-                        @error('description')
-                            <div class="fv-plugins-message-container invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <!--end::Input group-->
+                    <x-html.form.input :type="'text'" :name="'title'" :label="'Title'" :value="old('title')" :required="true" :placeholder="'Enter the Book Title'" />
+
+                    <x-html.form.input :type="'text'" :name="'author'" :label="'Author'" :value="old('author')" :required="true" :placeholder="'Enter the author\'s name'" />
+
+                    <x-html.form.input :type="'number'" :inputmode="'numeric'" :name="'pages'" :label="'Pages'" :value="old('pages')" :required="true" :placeholder="'Enter the number of pages'" :obs="'Informe o número de páginas que o livro possui'" />
+
+                    <x-html.form.textarea :name="'description'" :label="'Description'" :value="old('description')" :required="true" />
                 </div>
                 <!--end::Card header-->
             </div>
