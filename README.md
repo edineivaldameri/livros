@@ -27,15 +27,9 @@ composer install
 ## Configuração
 
 Geralmente durante a instalação o próprio `composer` criará no diretório raiz da sua aplicação um arquivo `.env`.
-Se isso não ocorrer no poderá renomear o arquivo `env.example` para `.env` manualmente.
+Se isso não ocorrer você poderá renomear o arquivo `env.example` para `.env` manualmente.
 
-Com seu arquivo `.env` devidamente criado, execute o comando abaixo para criar a chave da sua aplicação.
-
-``` bash
-php artisan key:generate --ansi
-```
-
-Depois siga as intruções abaixo:
+Com seu arquivo `.env` devidamente criado, siga as intruções abaixo:
 
 1) Crie sua bade de dados (MySql) e configure no arquivo `.env`
 2) Após configurado o arquivo `.env` com seu dados de acesso ao banco de dados, execute os seguintes comandos: 
@@ -50,7 +44,7 @@ php artisan migrate
 ```
 Neste momento as tabelas do banco de dados foram criadas e já estaram disponíveis para utilização:
 
-4) VOcê pode popular o banco de dados executando o comando:
+4) Você pode popular o banco de dados executando o comando:
 ``` bash
 php artisan db:seed
 ```
@@ -58,7 +52,7 @@ Este comando criará automaticamente um usuário: `test@example.com` com a senha
 
 Após a criação do usuário será executado uma Factory para popular a tabela de livros com 50 registros iniciais;
 
-Se você não desejar criar esses registros, navegue ate o arquivo `database/seeders/DatabaseSeeder.php` e comente as linhas a seguir:
+Se você não desejar criar esses registros, navegue ate o arquivo `database/seeders/DatabaseSeeder.php` e comente as linhas como mostrado a seguir:
 
 ```php
 /**
@@ -83,3 +77,25 @@ php artisan serve
 2) Inicie o seu nagegador, [CLICANDO AQUI](http://localhost:8000/)
 
 Pronto, se tudo estiver correto você será direcionado para a Tela de Login e já pode iniciar a navegação pela aplicação;
+Como informado acima, para realizar o login basta informar o e-mail `test@example.com` e a senha `123456`.
+
+
+
+## Explicando o Projeto
+
+1) No canto superior esquerdo a um botão `SOL` ou `LUA` (depende do horário de acesso ao sistema). Nesse área será mostrado um widget com a previsão tempo que é busca na [API](https://hgbrasil.com/status/weather) informada.
+
+Foi optado pela captação do IP do cliente como forma de filtro da localização, conforme pode ser visto no Provider `app/Providers/ApiWeatherProvider.php` e segue exemplificado abaixo:
+
+```php
+ // ....
+    return Http::withOptions([
+        'verify' => false,
+        'base_uri' => 'https://api.hgbrasil.com',
+    ])->get('/weather', [
+        'key' => 'API_KEY',
+        'fields' => 'only_results',
+        'user_ip' => $app->request->ip(),
+    ]);
+ // ....
+```

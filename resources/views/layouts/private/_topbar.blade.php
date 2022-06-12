@@ -11,28 +11,7 @@
         </div>
         <!--begin::Menu-->
         <div class="menu menu-sub menu-sub-dropdown menu-column w-300px w-lg-300px" data-kt-menu="true" style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate(-229px, 65px);" data-popper-placement="bottom-end">
-            <div class="container-weather">
-                <div class="weather-side">
-                    <div class="weather-gradient"></div>
-                    <div class="date-container">
-                        <h2 class="date-dayname">
-                            <i class="bi bi-geo-alt fs-2" data-feather="map-pin"></i>
-                            {{ $weather['city'] }}
-                        </h2>
-                        <span class="date-day">
-                            {{ $weather['date'] }} - {{ $weather['time'] }}
-                        </span>
-                    </div>
-                    <div class="weather-container">
-                        <h1 class="weather-temp">
-                            {{ $weather['temp'] }}°C
-                        </h1>
-                        <h3 class="weather-desc">
-                            {{ $weather['description'] }}
-                        </h3>
-                    </div>
-                </div>
-            </div>
+            <x-html.weather :weather="$weather" />
         </div>
         <!--end::Menu-->
         <!--end::Menu wrapper-->

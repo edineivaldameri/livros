@@ -17,6 +17,6 @@ class BookTable extends Component
 
     public function render(): View
     {
-        return view('components.dashboaard.book-table');
+        return view('components.dashboard.book-table');
     }
 }
