@@ -26,8 +26,19 @@ composer install
 
 ## Configuração
 
-1) Crie sua bade de dados (MySql) e configure no arquivo .env
-2) Após configurado o arquivo .env com seu dados de acesso ao banco de dados, execute os seguintes comandos: 
+Geralmente durante a instalação o próprio `composer` criará no diretório raiz da sua aplicação um arquivo `.env`.
+Se isso não ocorrer no poderá renomear o arquivo `env.example` para `.env` manualmente.
+
+Com seu arquivo `.env` devidamente criado, execute o comando abaixo para criar a chave da sua aplicação.
+
+``` bash
+php artisan key:generate --ansi
+```
+
+Depois siga as intruções abaixo:
+
+1) Crie sua bade de dados (MySql) e configure no arquivo `.env`
+2) Após configurado o arquivo `.env` com seu dados de acesso ao banco de dados, execute os seguintes comandos: 
 
 ``` bash
 php artisan config:cache

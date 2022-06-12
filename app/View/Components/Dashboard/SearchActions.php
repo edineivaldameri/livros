@@ -1,28 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components\Dashboard;
 
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class SearchActions extends Component
 {
-
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
+    public function render(): View
     {
         return view('components.dashboard.search-actions');
     }

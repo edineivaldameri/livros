@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components\Dashboaard;
 
 use App\Models\Book;
@@ -11,7 +13,6 @@ class BookTable extends Component
 
     public function __construct(public Book $book)
     {
-        $this->book = $book;
     }
 
     public function render(): View
